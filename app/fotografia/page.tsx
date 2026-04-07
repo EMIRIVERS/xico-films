@@ -9,8 +9,8 @@ export default function FotografiaPage() {
   return (
     <>
       <section style={{ padding: '6rem 2rem 2rem' }}>
-        <TextReveal as="h1">
-          <span
+        <TextReveal>
+          <h1
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
@@ -20,7 +20,7 @@ export default function FotografiaPage() {
             }}
           >
             Fotografia
-          </span>
+          </h1>
         </TextReveal>
       </section>
 

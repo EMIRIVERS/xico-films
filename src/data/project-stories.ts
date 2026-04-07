@@ -1,150 +1,234 @@
+export type ProjectCategory = 'Comercial' | 'Video Clip' | 'Fotografia' | 'Podcast'
+
 export interface ProjectStory {
   slug: string
   title: string
   client: string
-  category: string
+  category: ProjectCategory
   year: string
   role: string
   description: string
+  /** Keys matching video titles in media_registry.json */
+  videoKeys: string[]
+  /** Keys matching photo project names in media_registry.json */
+  photoProject: string | null
 }
 
-export const projectStories: Record<string, ProjectStory> = {
-  // ── Photo projects ──────────────────────────────────────────────
-  'AHI NO MAS QUEDO': {
+export const projectStories: ProjectStory[] = [
+  // ── Comercial ───────────────────────────────────────────────
+  {
+    slug: 'noma-mezcal',
+    title: 'NOMA MEZCAL',
+    client: 'Noma Mezcal',
+    category: 'Comercial',
+    year: '2025',
+    role: 'Produccion audiovisual',
+    description: 'Campana audiovisual para Noma Mezcal.',
+    videoKeys: ['H1 - NOMA MEZCAL', 'H4 - NOMA MEZCAL'],
+    photoProject: null,
+  },
+  {
+    slug: 'tierra-jiasu',
+    title: 'TIERRA JIASU',
+    client: 'Tierra Jiasu',
+    category: 'Comercial',
+    year: '2025',
+    role: 'Produccion audiovisual',
+    description: 'Campana audiovisual para Tierra Jiasu.',
+    videoKeys: ['H1 - TIERRA JIASÚ', 'H2 - TIERRA JIASÚ'],
+    photoProject: null,
+  },
+  {
+    slug: 'conade',
+    title: 'CONADE',
+    client: 'CONADE',
+    category: 'Comercial',
+    year: '2025',
+    role: 'Produccion audiovisual',
+    description: 'Contenido para CONADE.',
+    videoKeys: ['H1 Conade - C2', 'H3 - Conade - C2'],
+    photoProject: null,
+  },
+  {
+    slug: 'amor-de-vaso',
+    title: 'AMOR DE VASO',
+    client: 'Cliente por definir',
+    category: 'Comercial',
+    year: '2025',
+    role: 'Produccion audiovisual',
+    description: 'Pieza audiovisual Amor de Vaso.',
+    videoKeys: ['H3 - AMOR DE VASO '],
+    photoProject: null,
+  },
+  {
+    slug: 'itsco',
+    title: 'ITSCO',
+    client: 'ITSCO',
+    category: 'Comercial',
+    year: '2025',
+    role: 'Produccion audiovisual y fotografia',
+    description: 'Campana integral para ITSCO.',
+    videoKeys: ['ITSCO H1.6'],
+    photoProject: 'itsco',
+  },
+  {
+    slug: 'lucky-stash',
+    title: 'LUCKY STASH',
+    client: 'Lucky Stash',
+    category: 'Comercial',
+    year: '2025',
+    role: 'Produccion audiovisual',
+    description: 'Contenido corporativo y redes para Lucky Stash.',
+    videoKeys: ['LUCKY STASH CORPORATIVO - REDES '],
+    photoProject: null,
+  },
+
+  // ── Video Clip ──────────────────────────────────────────────
+  {
+    slug: 'como-fuego-lento',
+    title: 'COMO FUEGO LENTO',
+    client: 'Artista por definir',
+    category: 'Video Clip',
+    year: '2025',
+    role: 'Direccion y produccion',
+    description: 'Video clip Como Fuego Lento.',
+    videoKeys: ['H1 - COMO FUEGO LENTO', 'H2 - COMO FUEGO LENTO', 'H3 - COMO FUEGO LENTO'],
+    photoProject: null,
+  },
+  {
+    slug: 'hipnotizado',
+    title: 'HIPNOTIZADO',
+    client: 'Artista por definir',
+    category: 'Video Clip',
+    year: '2025',
+    role: 'Direccion y produccion',
+    description: 'Video clip Hipnotizado.',
+    videoKeys: ['R1 - HIPNOTIZADO 1920', 'R2 - HIPNOTIZADO 1910'],
+    photoProject: null,
+  },
+
+  // ── Podcast ─────────────────────────────────────────────────
+  {
+    slug: 'cotorreo-cacao',
+    title: 'COTORREO + CACAO',
+    client: 'Cotorreo + Cacao',
+    category: 'Podcast',
+    year: '2025',
+    role: 'Produccion audiovisual',
+    description: 'Produccion del podcast Cotorreo + Cacao.',
+    videoKeys: ['COTORREO + CACAO T1 - E2 '],
+    photoProject: null,
+  },
+
+  // ── Fotografia ──────────────────────────────────────────────
+  {
     slug: 'ahi-no-mas-quedo',
     title: 'AHI NO MAS QUEDO',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Serie fotografica Ahi No Mas Quedo.',
+    videoKeys: [],
+    photoProject: 'AHI NO MAS QUEDO',
   },
-  ALT: {
-    slug: 'alt',
-    title: 'ALT',
-    client: 'Cliente por definir',
-    category: 'Fotografia',
-    year: '2025',
-    role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  DRINKS: {
-    slug: 'drinks',
-    title: 'DRINKS',
-    client: 'Cliente por definir',
-    category: 'Fotografia',
-    year: '2025',
-    role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  ESTUDIO: {
-    slug: 'estudio',
-    title: 'ESTUDIO',
-    client: 'Cliente por definir',
-    category: 'Fotografia',
-    year: '2025',
-    role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  GAC: {
+  {
     slug: 'gac',
     title: 'GAC',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Proyecto fotografico GAC.',
+    videoKeys: [],
+    photoProject: 'GAC',
   },
-  'hoyo 19': {
+  {
     slug: 'hoyo-19',
-    title: 'hoyo 19',
+    title: 'HOYO 19',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Proyecto fotografico Hoyo 19.',
+    videoKeys: [],
+    photoProject: 'hoyo 19',
   },
-  itsco: {
-    slug: 'itsco',
-    title: 'itsco',
-    client: 'Cliente por definir',
-    category: 'Fotografia',
-    year: '2025',
-    role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  nascar: {
+  {
     slug: 'nascar',
-    title: 'nascar',
+    title: 'NASCAR',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Cobertura fotografica NASCAR.',
+    videoKeys: [],
+    photoProject: 'nascar',
   },
-  PAISAJE: {
+  {
     slug: 'paisaje',
     title: 'PAISAJE',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Serie fotografica de paisaje.',
+    videoKeys: [],
+    photoProject: 'PAISAJE',
   },
-  RIMAN: {
+  {
+    slug: 'estudio',
+    title: 'ESTUDIO',
+    client: 'Cliente por definir',
+    category: 'Fotografia',
+    year: '2025',
+    role: 'Direccion creativa y fotografia',
+    description: 'Fotografia de estudio.',
+    videoKeys: [],
+    photoProject: 'ESTUDIO',
+  },
+  {
     slug: 'riman',
     title: 'RIMAN',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Proyecto fotografico RIMAN.',
+    videoKeys: [],
+    photoProject: 'RIMAN',
   },
-  TONIC: {
+  {
+    slug: 'alt',
+    title: 'ALT',
+    client: 'Cliente por definir',
+    category: 'Fotografia',
+    year: '2025',
+    role: 'Direccion creativa y fotografia',
+    description: 'Proyecto fotografico ALT.',
+    videoKeys: [],
+    photoProject: 'ALT',
+  },
+  {
+    slug: 'drinks',
+    title: 'DRINKS',
+    client: 'Cliente por definir',
+    category: 'Fotografia',
+    year: '2025',
+    role: 'Direccion creativa y fotografia',
+    description: 'Fotografia de cocteleria.',
+    videoKeys: [],
+    photoProject: 'DRINKS',
+  },
+  {
     slug: 'tonic',
     title: 'TONIC',
     client: 'Cliente por definir',
     category: 'Fotografia',
     year: '2025',
     role: 'Direccion creativa y fotografia',
-    description: 'Descripcion del proyecto por definir.',
+    description: 'Proyecto fotografico TONIC.',
+    videoKeys: [],
+    photoProject: 'TONIC',
   },
-
-  // ── Video categories ────────────────────────────────────────────
-  comercial: {
-    slug: 'comercial',
-    title: 'Comercial',
-    client: 'Cliente por definir',
-    category: 'Video',
-    year: '2025',
-    role: 'Produccion audiovisual',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  'video-clip': {
-    slug: 'video-clip',
-    title: 'Video Clip',
-    client: 'Cliente por definir',
-    category: 'Video',
-    year: '2025',
-    role: 'Produccion audiovisual',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  entrevista: {
-    slug: 'entrevista',
-    title: 'Entrevista',
-    client: 'Cliente por definir',
-    category: 'Video',
-    year: '2025',
-    role: 'Produccion audiovisual',
-    description: 'Descripcion del proyecto por definir.',
-  },
-  podcast: {
-    slug: 'podcast',
-    title: 'Podcast',
-    client: 'Cliente por definir',
-    category: 'Video',
-    year: '2025',
-    role: 'Produccion audiovisual',
-    description: 'Descripcion del proyecto por definir.',
-  },
-}
+]

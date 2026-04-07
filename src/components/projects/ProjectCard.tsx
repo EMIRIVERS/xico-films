@@ -11,6 +11,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const imageRef = useRef<HTMLDivElement>(null)
+  const hasVideo = project.videoKeys.length > 0
 
   const onMouseMove = (e: React.MouseEvent) => {
     const el = imageRef.current
@@ -49,7 +50,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           className="project-card-img"
         />
 
-        {project.category === 'Video' && (
+        {hasVideo && (
           <div className="project-card-play">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
               <circle cx="24" cy="24" r="23" stroke="white" strokeWidth="1" opacity="0.6" />

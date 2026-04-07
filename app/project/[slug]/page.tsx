@@ -3,7 +3,8 @@ import ProjectPageContent from '@/components/projects/ProjectPageContent'
 import {
   getAllProjects,
   getProjectBySlug,
-  getProjectMedia,
+  getProjectPhotos,
+  getProjectVideos,
   getAdjacentProjects,
 } from '@/lib/projects'
 
@@ -20,13 +21,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const project = getProjectBySlug(slug)
   if (!project) notFound()
 
-  const media = getProjectMedia(project.title)
+  const photos = getProjectPhotos(project)
+  const videos = getProjectVideos(project)
   const { prev, next } = getAdjacentProjects(slug)
 
   return (
     <ProjectPageContent
       project={project}
-      media={media}
+      photos={photos}
+      videos={videos}
       prev={prev}
       next={next}
     />

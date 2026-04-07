@@ -4,18 +4,13 @@ import TextReveal from '@/components/animations/TextReveal'
 import { getProjectsByCategory } from '@/lib/projects'
 
 export default function ComercialPage() {
-  const projects = getProjectsByCategory('Video').filter(
-    (p) => p.slug === 'comercial' ||
-    ['noma mezcal', 'tierra', 'conade', 'amor de vaso', 'itsco', 'lucky stash'].some(
-      (name) => p.title.toLowerCase().includes(name)
-    )
-  )
+  const projects = getProjectsByCategory('Comercial')
 
   return (
     <>
       <section style={{ padding: '6rem 2rem 2rem' }}>
-        <TextReveal as="h1">
-          <span
+        <TextReveal>
+          <h1
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
@@ -25,7 +20,7 @@ export default function ComercialPage() {
             }}
           >
             Comercial
-          </span>
+          </h1>
         </TextReveal>
       </section>
 

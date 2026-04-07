@@ -8,16 +8,17 @@ import ParallaxHero from '@/components/animations/ParallaxHero'
 import ScrollRevealImage from '@/components/animations/ScrollRevealImage'
 import MagneticWrap from '@/components/animations/MagneticWrap'
 import type { ProjectWithCover } from '@/lib/projects'
-import type { PhotoEntry } from '@/types/media'
+import type { PhotoEntry, VideoEntry } from '@/types/media'
 
 interface ProjectPageContentProps {
   project: ProjectWithCover
-  media: PhotoEntry[]
+  photos: PhotoEntry[]
+  videos: VideoEntry[]
   prev: ProjectWithCover | null
   next: ProjectWithCover | null
 }
 
-export default function ProjectPageContent({ project, media, prev, next }: ProjectPageContentProps) {
+export default function ProjectPageContent({ project, photos, videos, prev, next }: ProjectPageContentProps) {
   return (
     <>
       {/* Hero with parallax */}
@@ -31,7 +32,7 @@ export default function ProjectPageContent({ project, media, prev, next }: Proje
           style={{ objectFit: 'cover', transform: 'scale(1.15)' }}
         />
 
-        {project.category === 'Video' && (
+        {videos.length > 0 && (
           <div
             style={{
               position: 'absolute',
@@ -91,6 +92,21 @@ export default function ProjectPageContent({ project, media, prev, next }: Proje
           </h1>
         </TextReveal>
 
+        <TextReveal delay={0.05}>
+          <p
+            style={{
+              fontFamily: 'var(--font-accent)',
+              fontStyle: 'italic',
+              fontSize: 'clamp(1rem, 1.5vw, 1.25rem)',
+              color: 'var(--text-muted)',
+              marginTop: '1rem',
+              lineHeight: 1.6,
+            }}
+          >
+            {project.description}
+          </p>
+        </TextReveal>
+
         <div
           style={{
             display: 'grid',
@@ -119,11 +135,82 @@ export default function ProjectPageContent({ project, media, prev, next }: Proje
         </div>
       </section>
 
-      {/* Photo gallery with scroll reveals */}
-      {media.length > 0 && (
+      {/* Videos section */}
+      {videos.length > 0 && (
         <section style={{ padding: '0 2rem 4rem' }}>
+          <TextReveal>
+            <h2
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontWeight: 700,
+                fontSize: '0.75rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.15em',
+                color: 'var(--text-secondary)',
+                marginBottom: '1.5rem',
+              }}
+            >
+              Video{videos.length > 1 ? 's' : ''}
+            </h2>
+          </TextReveal>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {videos.map((video, i) => (
+              <ScrollRevealImage key={video.id} index={i}>
+                <div
+                  style={{
+                    position: 'relative',
+                    aspectRatio: '16/9',
+                    background: '#111',
+                    borderRadius: '4px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <div
+                    style={{
+                      textAlign: 'center',
+                      color: 'var(--text-secondary)',
+                    }}
+                  >
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style={{ margin: '0 auto 0.5rem' }}>
+                      <circle cx="24" cy="24" r="23" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+                      <polygon points="20,14 36,24 20,34" fill="rgba(255,255,255,0.5)" />
+                    </svg>
+                    <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                      {video.title}
+                    </p>
+                  </div>
+                </div>
+              </ScrollRevealImage>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Photo gallery */}
+      {photos.length > 0 && (
+        <section style={{ padding: '0 2rem 4rem' }}>
+          {videos.length > 0 && (
+            <TextReveal>
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  fontSize: '0.75rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.15em',
+                  color: 'var(--text-secondary)',
+                  marginBottom: '1.5rem',
+                }}
+              >
+                Fotografia
+              </h2>
+            </TextReveal>
+          )}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            {media.map((photo, i) => (
+            {photos.map((photo, i) => (
               <ScrollRevealImage key={photo.id} index={i}>
                 <Image
                   src={photo.url}

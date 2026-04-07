@@ -8,39 +8,48 @@ export interface ProjectWithCover extends ProjectStory {
   coverImage: string
 }
 
-function getCoverForProject(name: string, category: string): string {
-  if (category === 'Fotografia') {
-    const photo = registry.photos.find((p) => p.project === name)
-    return photo?.url ?? '/media/posters/placeholder.webp'
+function getCoverForProject(project: ProjectStory): string {
+  // Photo projects: use first photo
+  if (project.photoProject) {
+    const photo = registry.photos.find((p) => p.project === project.photoProject)
+    if (photo) return photo.url
   }
 
-  const video = registry.videos.find((v) =>
-    v.title.toLowerCase().includes(name.toLowerCase()) ||
-    name.toLowerCase().includes(v.title.toLowerCase().split(' - ')[0].replace('h1', '').replace('h2', '').replace('h3', '').replace('h4', '').trim())
-  )
-  if (video?.poster) return video.poster
-  return `/media/posters/${name.toLowerCase().replace(/\s+/g, '-')}.webp`
+  // Video projects: use poster if available
+  if (project.videoKeys.length > 0) {
+    const video = registry.videos.find((v) => v.title === project.videoKeys[0])
+    if (video?.poster) return video.poster
+  }
+
+  return `/media/posters/${project.slug}.webp`
+}
+
+function enrichProject(p: ProjectStory): ProjectWithCover {
+  return { ...p, coverImage: getCoverForProject(p) }
 }
 
 export function getAllProjects(): ProjectWithCover[] {
-  return Object.values(projectStories).map((p) => ({
-    ...p,
-    coverImage: getCoverForProject(p.title, p.category),
-  }))
+  return projectStories.map(enrichProject)
 }
 
 export function getProjectsByCategory(category: string): ProjectWithCover[] {
-  return getAllProjects().filter(
-    (p) => p.category.toLowerCase() === category.toLowerCase()
-  )
+  return projectStories
+    .filter((p) => p.category.toLowerCase() === category.toLowerCase())
+    .map(enrichProject)
 }
 
 export function getProjectBySlug(slug: string): ProjectWithCover | undefined {
-  return getAllProjects().find((p) => p.slug === slug)
+  const p = projectStories.find((p) => p.slug === slug)
+  return p ? enrichProject(p) : undefined
 }
 
-export function getProjectMedia(projectName: string): PhotoEntry[] {
-  return registry.photos.filter((p) => p.project === projectName)
+export function getProjectPhotos(project: ProjectStory): PhotoEntry[] {
+  if (!project.photoProject) return []
+  return registry.photos.filter((p) => p.project === project.photoProject)
+}
+
+export function getProjectVideos(project: ProjectStory): VideoEntry[] {
+  return registry.videos.filter((v) => project.videoKeys.includes(v.title))
 }
 
 export function getAdjacentProjects(slug: string): {

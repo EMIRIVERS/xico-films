@@ -4,18 +4,13 @@ import TextReveal from '@/components/animations/TextReveal'
 import { getProjectsByCategory } from '@/lib/projects'
 
 export default function VideoClipPage() {
-  const projects = getProjectsByCategory('Video').filter(
-    (p) => p.slug === 'video-clip' ||
-    ['fuego lento', 'hipnotizado'].some(
-      (name) => p.title.toLowerCase().includes(name)
-    )
-  )
+  const projects = getProjectsByCategory('Video Clip')
 
   return (
     <>
       <section style={{ padding: '6rem 2rem 2rem' }}>
-        <TextReveal as="h1">
-          <span
+        <TextReveal>
+          <h1
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 700,
@@ -25,7 +20,7 @@ export default function VideoClipPage() {
             }}
           >
             Video Clip
-          </span>
+          </h1>
         </TextReveal>
       </section>
 
