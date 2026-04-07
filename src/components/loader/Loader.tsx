@@ -80,7 +80,7 @@ export default function Loader() {
             animation: 'revealUp 0.8s var(--o4) 0.5s both',
           }}
         >
-          Pescadora
+          CARAJO studios
         </p>
       </div>
 

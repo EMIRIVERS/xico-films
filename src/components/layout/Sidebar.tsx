@@ -46,7 +46,7 @@ export default function Sidebar() {
           color: 'var(--text-primary)',
         }}
       >
-        Pescadora
+        CARAJO studios
       </Link>
 
       <div

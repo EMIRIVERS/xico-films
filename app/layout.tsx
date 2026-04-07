@@ -24,10 +24,10 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Pescadora',
+  title: 'CARAJO studios',
   description: 'Fotografia y video de campana. Mexico.',
   openGraph: {
-    title: 'Pescadora',
+    title: 'CARAJO studios',
     description: 'Fotografia y video de campana. Mexico.',
     type: 'website',
   },

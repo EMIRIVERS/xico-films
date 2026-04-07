@@ -35,7 +35,7 @@ export default function AboutPage() {
                 color: 'var(--text-primary)',
               }}
             >
-              Pescadora es una productora audiovisual basada en Mexico,
+              CARAJO studios es una productora audiovisual basada en Mexico,
               especializada en fotografia y video de campana.
             </p>
           </TextReveal>

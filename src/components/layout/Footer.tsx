@@ -17,7 +17,7 @@ export default function Footer() {
       <div>
         <TextReveal>
           <span className="footer-logo">
-            Pescadora
+            CARAJO studios
           </span>
         </TextReveal>
         <TextReveal delay={0.1}>

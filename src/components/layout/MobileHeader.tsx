@@ -33,7 +33,7 @@ export default function MobileHeader({ isOpen, onToggle }: MobileHeaderProps) {
           color: 'var(--text-primary)',
         }}
       >
-        Pescadora
+        CARAJO studios
       </span>
 
       <button
