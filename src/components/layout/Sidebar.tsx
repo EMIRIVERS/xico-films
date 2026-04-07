@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import MagneticWrap from '@/components/animations/MagneticWrap'
 
 const navLinks = [
   { href: '/', label: 'Stories' },
@@ -33,21 +34,24 @@ export default function Sidebar() {
       }}
       className="sidebar-desktop"
     >
-      <Link
-        href="/"
-        style={{
-          writingMode: 'vertical-rl',
-          transform: 'rotate(180deg)',
-          fontSize: '0.75rem',
-          fontFamily: 'var(--font-display)',
-          fontWeight: 700,
-          letterSpacing: '0.15em',
-          textTransform: 'uppercase',
-          color: 'var(--text-primary)',
-        }}
-      >
-        CARAJO studios
-      </Link>
+      <MagneticWrap strength={0.4}>
+        <Link
+          href="/"
+          data-cursor-hover
+          style={{
+            writingMode: 'vertical-rl',
+            transform: 'rotate(180deg)',
+            fontSize: '0.75rem',
+            fontFamily: 'var(--font-display)',
+            fontWeight: 700,
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            color: 'var(--text-primary)',
+          }}
+        >
+          CARAJO studios
+        </Link>
+      </MagneticWrap>
 
       <div
         style={{
@@ -58,21 +62,23 @@ export default function Sidebar() {
         }}
       >
         {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            style={{
-              writingMode: 'vertical-rl',
-              transform: 'rotate(180deg)',
-              fontSize: '0.6rem',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: pathname === link.href ? 'var(--text-primary)' : 'var(--text-secondary)',
-              transition: 'color 0.3s var(--o2)',
-            }}
-          >
-            {link.label}
-          </Link>
+          <MagneticWrap key={link.href} strength={0.5}>
+            <Link
+              href={link.href}
+              data-cursor-hover
+              style={{
+                writingMode: 'vertical-rl',
+                transform: 'rotate(180deg)',
+                fontSize: '0.6rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: pathname === link.href ? 'var(--text-primary)' : 'var(--text-secondary)',
+                transition: 'color 0.3s var(--o2)',
+              }}
+            >
+              {link.label}
+            </Link>
+          </MagneticWrap>
         ))}
       </div>
     </nav>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRef } from 'react'
 import type { ProjectWithCover } from '@/lib/projects'
 
 interface ProjectCardProps {
@@ -9,12 +10,36 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const imageRef = useRef<HTMLDivElement>(null)
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    const el = imageRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 10
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 10
+    el.style.transform = `perspective(800px) rotateY(${x}deg) rotateX(${-y}deg) scale(1.02)`
+  }
+
+  const onMouseLeave = () => {
+    if (imageRef.current) {
+      imageRef.current.style.transform = 'perspective(800px) rotateY(0) rotateX(0) scale(1)'
+    }
+  }
+
   return (
     <Link
       href={`/project/${project.slug}`}
       className="project-card"
+      data-cursor-hover
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
     >
-      <div className="project-card-image-wrap">
+      <div
+        ref={imageRef}
+        className="project-card-image-wrap"
+        style={{ transition: 'transform 0.4s var(--o4)' }}
+      >
         <Image
           src={project.coverImage}
           alt={project.title}
@@ -27,10 +52,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {project.category === 'Video' && (
           <div className="project-card-play">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <polygon points="18,12 38,24 18,36" fill="white" />
+              <circle cx="24" cy="24" r="23" stroke="white" strokeWidth="1" opacity="0.6" />
+              <polygon points="20,14 36,24 20,34" fill="white" />
             </svg>
           </div>
         )}
+
+        <div className="project-card-overlay" />
       </div>
 
       <div className="project-card-title-wrap">

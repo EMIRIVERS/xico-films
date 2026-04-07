@@ -1,6 +1,7 @@
 'use client'
 
 import ProjectCard from './ProjectCard'
+import ScrollRevealCard from '@/components/animations/ScrollRevealCard'
 import type { ProjectWithCover } from '@/lib/projects'
 
 interface ProjectGridProps {
@@ -10,8 +11,10 @@ interface ProjectGridProps {
 export default function ProjectGrid({ projects }: ProjectGridProps) {
   return (
     <div className="project-grid">
-      {projects.map((project) => (
-        <ProjectCard key={project.slug} project={project} />
+      {projects.map((project, i) => (
+        <ScrollRevealCard key={project.slug} index={i % 4}>
+          <ProjectCard project={project} />
+        </ScrollRevealCard>
       ))}
     </div>
   )

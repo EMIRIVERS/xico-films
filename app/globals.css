@@ -121,6 +121,24 @@ img, video {
   }
 }
 
+/* Custom cursor */
+body {
+  cursor: none !important;
+}
+
+a, button, [data-cursor-hover] {
+  cursor: none !important;
+}
+
+@media (max-width: 767px) {
+  body, a, button, [data-cursor-hover] {
+    cursor: auto !important;
+  }
+  .cursor-dot, .cursor-ring {
+    display: none !important;
+  }
+}
+
 /* Project card */
 .project-card {
   display: block;
@@ -135,14 +153,32 @@ img, video {
   aspect-ratio: 16/9;
   overflow: hidden;
   background: #111;
+  border-radius: 4px;
 }
 
 .project-card-img {
-  transition: transform 0.6s var(--o3);
+  transition: transform 0.8s var(--o3), filter 0.6s var(--o3);
 }
 
 .project-card:hover .project-card-img {
-  transform: scale(1.03);
+  transform: scale(1.06);
+  filter: brightness(0.7);
+}
+
+.project-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
+  opacity: 0;
+  transition: opacity 0.5s var(--o3);
+}
+
+.project-card:hover .project-card-overlay {
+  opacity: 1;
 }
 
 .project-card-play {
@@ -151,7 +187,15 @@ img, video {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.7;
+  opacity: 0;
+  transition: opacity 0.5s var(--o3), transform 0.5s var(--o4);
+  transform: scale(0.8);
+  z-index: 2;
+}
+
+.project-card:hover .project-card-play {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .project-card-title-wrap {
@@ -181,11 +225,13 @@ img, video {
   letter-spacing: 0.08em;
   margin-top: 0.25rem;
   opacity: 0;
-  transition: opacity 0.4s var(--o2);
+  transform: translateY(5px);
+  transition: opacity 0.4s var(--o2) 0.05s, transform 0.4s var(--o2) 0.05s;
 }
 
 .project-card:hover .project-card-category {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Footer */
@@ -197,6 +243,17 @@ img, video {
   gap: 2rem;
   font-size: 0.75rem;
   color: var(--text-secondary);
+}
+
+/* Project nav links */
+.project-nav-link:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Play button hover */
+.project-play-btn:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .footer-logo {

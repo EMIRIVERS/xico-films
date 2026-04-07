@@ -5,6 +5,8 @@ import Sidebar from './Sidebar'
 import MobileHeader from './MobileHeader'
 import MobileMenu from './MobileMenu'
 import SmoothScroll from '@/components/animations/SmoothScroll'
+import CustomCursor from '@/components/animations/CustomCursor'
+import PageTransition from '@/components/animations/PageTransition'
 
 export default function LayoutShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -14,13 +16,16 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
 
   return (
     <>
+      <CustomCursor />
       <Sidebar />
       <MobileHeader isOpen={menuOpen} onToggle={toggleMenu} />
       <MobileMenu isOpen={menuOpen} onClose={closeMenu} />
 
       <SmoothScroll>
         <main className="main-content">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
       </SmoothScroll>
     </>
