@@ -1,8 +1,27 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import FishCursor from '@/components/ui/FishCursor'
+import { Inter, Space_Grotesk, Playfair_Display } from 'next/font/google'
+import LayoutShell from '@/components/layout/LayoutShell'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  weight: ['400', '700'],
+  display: 'swap',
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  variable: '--font-accent',
+  style: ['normal', 'italic'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Pescadora',
@@ -20,10 +39,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es">
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        <FishCursor />
-        {children}
+    <html lang="es" className={`${inter.variable} ${spaceGrotesk.variable} ${playfairDisplay.variable}`}>
+      <body style={{ fontFamily: 'var(--font-body), sans-serif' }}>
+        <LayoutShell>
+          {children}
+        </LayoutShell>
       </body>
     </html>
   )

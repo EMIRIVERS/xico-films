@@ -1,50 +1,34 @@
-'use client'
-import { useState, useCallback } from 'react'
-import { Hero } from '@/components/sections/Hero'
-import PortfolioHeader from '@/components/sections/PortfolioHeader'
-import ManifestoSection from '@/components/sections/ManifestoSection'
-import PortfolioSection from '@/components/sections/PortfolioSection'
-import { ServiciosSection } from '@/components/sections/ServiciosSection'
-import { ContactoSection } from '@/components/sections/ContactoSection'
-
-type AppPhase = 'landing' | 'exiting' | 'portfolio'
+import Loader from '@/components/loader/Loader'
+import ProjectGrid from '@/components/projects/ProjectGrid'
+import Footer from '@/components/layout/Footer'
+import TextReveal from '@/components/animations/TextReveal'
+import { getAllProjects } from '@/lib/projects'
 
 export default function Home() {
-  const [phase, setPhase] = useState<AppPhase>('landing')
-
-  const handleVerTrabajo = useCallback(() => setPhase('exiting'), [])
-  const handleExitComplete = useCallback(() => setPhase('portfolio'), [])
+  const projects = getAllProjects()
 
   return (
     <>
-      {/* Landing — fixed overlay, dismissed after fish dive */}
-      {phase !== 'portfolio' && (
-        <Hero
-          triggerExit={phase === 'exiting'}
-          onVerTrabajo={handleVerTrabajo}
-          onExitComplete={handleExitComplete}
-        />
-      )}
+      <Loader />
 
-      {/* Fixed header — appears after transition */}
-      <PortfolioHeader visible={phase === 'portfolio'} />
+      <section style={{ padding: '6rem 2rem 2rem' }}>
+        <TextReveal as="h1">
+          <span
+            style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 700,
+              fontSize: 'clamp(2rem, 4vw, 4rem)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
+            Stories
+          </span>
+        </TextReveal>
+      </section>
 
-      {/* Portfolio — surfaces from the depth where the fish dove */}
-      <div
-        style={{
-          opacity: phase === 'portfolio' ? 1 : 0,
-          transform: phase === 'portfolio' ? 'translateY(0)' : 'translateY(30px)',
-          transition: 'opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s',
-          pointerEvents: phase === 'portfolio' ? 'auto' : 'none',
-        }}
-      >
-        <main>
-          <ManifestoSection />
-          <PortfolioSection />
-          <ServiciosSection />
-          <ContactoSection />
-        </main>
-      </div>
+      <ProjectGrid projects={projects} />
+      <Footer />
     </>
   )
 }
