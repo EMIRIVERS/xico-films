@@ -52,3 +52,6 @@ next-env.d.ts
 *.avi
 *.zip
 Contenido/
+
+.vercel
+.env*.local
