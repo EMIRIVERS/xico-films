@@ -1,13 +1,8 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Check } from 'lucide-react'
 
-// Post-submit thank-you page: keep it out of the index and override the
-// parent /cotiza canonical so it doesn't point elsewhere.
-export const metadata: Metadata = {
-  title: 'Mensaje recibido',
-  robots: { index: false, follow: false },
-  alternates: { canonical: '/cotiza/success' },
+export const metadata = {
+  title: 'Mensaje recibido — XICO Films',
 }
 
 export default function CotizaSuccessPage() {

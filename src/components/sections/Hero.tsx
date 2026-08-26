@@ -19,10 +19,8 @@ export function Hero() {
         zIndex: 10,
       }} />
 
-      {/* Logo XICO FILMS — the page's single semantic <h1>.
-          Visible text stays "XICO / FILMS"; a visually-hidden suffix gives
-          crawlers and screen readers the full descriptive heading. */}
-      <h1 style={{
+      {/* Logo XICO FILMS */}
+      <div style={{
         position: 'relative',
         zIndex: 20,
         display: 'flex',
@@ -30,9 +28,8 @@ export function Hero() {
         alignItems: 'center',
         justifyContent: 'center',
         pointerEvents: 'none',
-        margin: 0,
       }}>
-        <span style={{
+        <p style={{
           fontFamily: 'var(--font-geist-sans)',
           fontWeight: 900,
           fontSize: 'clamp(5rem, 22vw, 18rem)',
@@ -40,13 +37,12 @@ export function Hero() {
           lineHeight: 0.85,
           textTransform: 'uppercase',
           color: 'var(--color-text)',
-          display: 'block',
+          margin: 0,
         }}>
           XICO
-        </span>
+        </p>
 
-        <span aria-hidden="true" style={{
-          display: 'block',
+        <div style={{
           width: '100%',
           maxWidth: 'clamp(300px, 60vw, 900px)',
           height: '1px',
@@ -54,33 +50,19 @@ export function Hero() {
           margin: '1.2rem 0',
         }} />
 
-        <span style={{
+        <p style={{
           fontFamily: 'var(--font-geist-mono)',
           fontWeight: 400,
           fontSize: 'clamp(0.7rem, 2vw, 1.3rem)',
           letterSpacing: '0.6em',
           textTransform: 'uppercase',
           color: 'rgba(255,255,255,0.3)',
+          margin: 0,
           lineHeight: 1,
-          display: 'block',
         }}>
           FILMS
-        </span>
-
-        <span style={{
-          position: 'absolute',
-          width: 1,
-          height: 1,
-          padding: 0,
-          margin: -1,
-          overflow: 'hidden',
-          clipPath: 'inset(50%)',
-          whiteSpace: 'nowrap',
-          border: 0,
-        }}>
-          {' '}— Productora de video y fotografía de campaña en México
-        </span>
-      </h1>
+        </p>
+      </div>
 
       {/* Fade inferior */}
       <div style={{

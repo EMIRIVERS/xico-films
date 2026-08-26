@@ -1,8 +1,6 @@
-import { Suspense } from 'react'
 import { createClient } from '@/lib/supabase/server'
 import type { CmsProjectCard } from '@/components/sections/PortfolioSection'
 import HomeClient from '@/components/sections/HomeClient'
-import { Hero } from '@/components/sections/Hero'
 import type { VideoEntry, VideoCategory, PortfolioCategory, PhotoAlbum } from '@/types/media'
 
 export const revalidate = 3600
@@ -32,7 +30,7 @@ function dbToVideoEntry(row: DbVideo): VideoEntry {
   }
 }
 
-async function PortfolioData() {
+export default async function Home() {
   let cmsProjects: CmsProjectCard[] = []
   let videos: VideoEntry[] = []
   let categories: PortfolioCategory[] = []
@@ -94,14 +92,4 @@ async function PortfolioData() {
   }
 
   return <HomeClient cmsProjects={cmsProjects} videos={videos} categories={categories} photoAlbums={photoAlbums} />
-}
-
-// The Hero fallback lets the branded above-the-fold content stream immediately
-// while Supabase resolves behind the Suspense boundary.
-export default function Home() {
-  return (
-    <Suspense fallback={<Hero />}>
-      <PortfolioData />
-    </Suspense>
-  )
 }

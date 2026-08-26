@@ -134,8 +134,6 @@ export default function ManifestoSection() {
   return (
     <section
       ref={sectionRef}
-      id="manifiesto"
-      aria-label="Manifiesto"
       style={{
         padding: 'clamp(5rem, 10vw, 10rem) clamp(1.2rem, 4vw, 2rem) clamp(4rem, 8vw, 8rem)',
         borderTop: '1px solid rgba(255,255,255,0.06)',
